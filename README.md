@@ -1,2 +1,3 @@
-# rosso
-Everything with go well with RSS feed.
+# Rosso
+
+Everything goes well with RSS feeds.
