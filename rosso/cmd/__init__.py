@@ -7,6 +7,8 @@ from rosso.vendor.tabulate import tabulate
 
 APP_NAME = 'rosso'
 VERSION_OPT_MSG = APP_NAME + ' %(version)s'
+TITLE_SHORTEN_LENGTH = 10
+SUMMARY_SHORTEN_LENGTH = 30
 
 
 @click.group()
@@ -23,16 +25,16 @@ def cli():
 @click.argument('urls', nargs=-1)
 def list(title, summary, pubdate, urls):
     for url in urls:
-        feed = feedparser.parse(uri)
+        feed = feedparser.parse(url)
         for entry in feed.entries:
             value = entry.title
-            if title == 'short' and len(value) > 10:
-                value = value[:10] + '...'
+            if title == 'short' and len(value) > TITLE_SHORTEN_LENGTH:
+                value = value[:TITLE_SHORTEN_LENGTH] + '...'
             click.echo(u'title: {}'.format(value))
 
             value = entry.summary.replace('\r', '').replace('\n', '')
-            if summary == 'short' and len(value) > 30:
-                value = value[:30] + '...'
+            if summary == 'short' and len(value) > SUMMARY_SHORTEN_LENGTH:
+                value = value[:SUMMARY_SHORTEN_LENGTH] + '...'
             click.echo(u'summary: {}'.format(value))
 
             value = entry.published
