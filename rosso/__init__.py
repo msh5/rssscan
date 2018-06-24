@@ -1,8 +1,8 @@
-r'''
- _ __ ___  ___ ___  ___
-| '__/ _ \/ __/ __|/ _ \
-| | | (_) \__ \__ \ (_) |
-|_|  \___/|___/___/\___/
-'''
+import os
+import sys
 
-__version__ = '0.0.0'
+from rosso.__about__ import __version__
+
+LIB_ROOT = os.path.dirname(os.path.realpath(__file__))
+LIB_VENDOR = os.sep.join([LIB_ROOT, 'vendor'])
+sys.path.insert(0, LIB_VENDOR)
