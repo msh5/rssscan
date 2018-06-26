@@ -26,9 +26,10 @@ def cli():
 @click.command()
 @click.option('--title', default='short', type=click.Choice(['full', 'short']))
 @click.option('--desc', default='short', type=click.Choice(['full', 'short']))
-@click.option('--pubdate', default='ja', type=click.Choice(['raw', 'ja']))
+@click.option('--pubdate', default='jp', type=click.Choice(['raw', 'jp']))
 @click.argument('url_or_filepaths', nargs=-1)
 def pprint(title, desc, pubdate, url_or_filepaths):
+    """List all metadatas of RSS feed items"""
     for url_or_filepath in url_or_filepaths:
         try:
             pline = pipeline.RossoPipeline()
@@ -55,6 +56,7 @@ def pprint(title, desc, pubdate, url_or_filepaths):
 @click.option('--style', default='short', type=click.Choice(['full', 'short']))
 @click.argument('url_or_filepaths', nargs=-1)
 def titles(style, url_or_filepaths):
+    """List only titles of RSS feed items"""
     for url_or_filepath in url_or_filepaths:
         try:
             pline = pipeline.RossoPipeline()
