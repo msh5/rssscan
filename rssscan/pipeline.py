@@ -1,7 +1,7 @@
 DEFAULT_PARAMS = {}
 
 
-class RossoPipeline(object):
+class ScanPipeline(object):
     def __init__(self):
         self.parsers = []
         self.filters = []

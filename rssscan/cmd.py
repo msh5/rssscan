@@ -17,26 +17,24 @@ TITLE_SHORTEN_LENGTH = 10
 DESC_SHORTEN_LENGTH = 30
 
 
-@click.group()
-@click.version_option(version=__version__, message=VERSION_OPT_MSG)
-def cli():
-    pass
-
-
 @click.command()
+@click.version_option(version=__version__, message=VERSION_OPT_MSG)
 @click.option('--title', default='short', type=click.Choice(['full', 'short']))
 @click.option('--desc', default='short', type=click.Choice(['full', 'short']))
 @click.option('--pubdate', default='jp', type=click.Choice(['raw', 'jp']))
-@click.argument('url_or_filepaths', nargs=-1)
-def pprint(title, desc, pubdate, url_or_filepaths):
-    """List all metadatas of RSS feed items"""
+@click.option('--field', type=click.Choice(['title', 'desc', 'pubdate']))
+@click.argument('url_or_filepaths', nargs=-1, required=True)
+def scan(title, desc, pubdate, field, url_or_filepaths):
+    """Scan RSS feeds and output metadata of the items"""
     for url_or_filepath in url_or_filepaths:
         try:
-            pline = pipeline.RossoPipeline()
+            pline = pipeline.ScanPipeline()
+
+            # Support input from filename or URL
             pline.add_parser(parse.FileParser(url_or_filepath))
             pline.add_parser(parse.HTTPParser(url_or_filepath))
-            pline.add_filter(
-                filter_.TruncateFilter('description', ['\r', '\n']))
+
+            # Apply cosmetic requirements to attribute values
             if title == "short":
                 pline.add_filter(
                     filter_.ShortenFilter('title', TITLE_SHORTEN_LENGTH))
@@ -45,38 +43,32 @@ def pprint(title, desc, pubdate, url_or_filepaths):
                     filter_.ShortenFilter('description', DESC_SHORTEN_LENGTH))
             if pubdate == "jp":
                 pline.add_filter(filter_.DateToJpStyleFilter())
-            pline.set_formatter(format_.PPrintFormatter())
+            pline.add_filter(
+                filter_.TruncateFilter('description', ['\r', '\n']))
+
+            # Remove attributes and format as output
+            if field == 'title':
+                pline.add_filter(filter_.AttributeRemoveFilter('description'))
+                pline.add_filter(filter_.AttributeRemoveFilter('pubDate'))
+                pline.set_formatter(format_.ListFormatter())
+            elif field == 'desc':
+                pline.add_filter(filter_.AttributeRemoveFilter('title'))
+                pline.add_filter(filter_.AttributeRemoveFilter('pubDate'))
+                pline.set_formatter(format_.ListFormatter())
+            elif field == 'pubdate':
+                pline.add_filter(filter_.AttributeRemoveFilter('title'))
+                pline.add_filter(filter_.AttributeRemoveFilter('description'))
+                pline.set_formatter(format_.ListFormatter())
+            else:
+                assert field is None
+                pline.set_formatter(format_.PPrintFormatter())
+
+            # Emit the output to stdout
             pline.set_emitter(emit.StdoutEmitter())
             pline.run()
         except:
             click.echo(traceback.format_exc())
-
-
-@click.command()
-@click.option('--style', default='short', type=click.Choice(['full', 'short']))
-@click.argument('url_or_filepaths', nargs=-1)
-def titles(style, url_or_filepaths):
-    """List only titles of RSS feed items"""
-    for url_or_filepath in url_or_filepaths:
-        try:
-            pline = pipeline.RossoPipeline()
-            pline.add_parser(parse.FileParser(url_or_filepath))
-            pline.add_parser(parse.HTTPParser(url_or_filepath))
-            if style == "short":
-                pline.add_filter(
-                    filter_.ShortenFilter('title', TITLE_SHORTEN_LENGTH))
-            pline.add_filter(filter_.AttributeRemoveFilter('description'))
-            pline.add_filter(filter_.AttributeRemoveFilter('pubDate'))
-            pline.set_formatter(format_.ListFormatter())
-            pline.set_emitter(emit.StdoutEmitter())
-            pline.run()
-        except:
-            click.echo(traceback.format_exc())
-
-
-cli.add_command(pprint)
-cli.add_command(titles)
 
 
 def main():
-    cli(obj={})
+    scan()

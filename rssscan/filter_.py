@@ -3,7 +3,7 @@ from collections import OrderedDict
 import dateutil.parser
 
 
-class RossoFilter(object):
+class FeedFilter(object):
     def __init__(self):
         pass
 
@@ -26,7 +26,7 @@ class RossoFilter(object):
         pass
 
 
-class ShortenFilter(RossoFilter):
+class ShortenFilter(FeedFilter):
     def __init__(self, attribute, maxlen):
         super(ShortenFilter, self).__init__()
         self.attribute = attribute
@@ -38,7 +38,7 @@ class ShortenFilter(RossoFilter):
         return value
 
 
-class ReplaceFilter(RossoFilter):
+class ReplaceFilter(FeedFilter):
     def __init__(self, attribute, src_chars, dest_char):
         super(ReplaceFilter, self).__init__()
         self.attribute = attribute
@@ -57,7 +57,7 @@ class TruncateFilter(ReplaceFilter):
         super(TruncateFilter, self).__init__(attribute, src_chars, '')
 
 
-class DateToJpStyleFilter(RossoFilter):
+class DateToJpStyleFilter(FeedFilter):
     def __init__(self):
         super(DateToJpStyleFilter, self).__init__()
 
@@ -68,7 +68,7 @@ class DateToJpStyleFilter(RossoFilter):
         return value
 
 
-class AttributeRemoveFilter(RossoFilter):
+class AttributeRemoveFilter(FeedFilter):
     def __init__(self, attr):
         super(AttributeRemoveFilter, self).__init__()
         self.attr = attr

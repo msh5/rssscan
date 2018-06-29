@@ -1,4 +1,4 @@
-# Rosso
+# rssscan
 
 Everything goes well with RSS feeds.
 
@@ -6,7 +6,7 @@ Everything goes well with RSS feeds.
 
 ```console
 $ pip install rssscan
-// Install only Rosso package because it requires no dependency packages
+// Install only rssscan package because it requires no dependency packages
 ```
 
 ## Usage

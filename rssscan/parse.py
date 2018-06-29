@@ -4,7 +4,7 @@ import os
 import feedparser
 
 
-class RossoParser(object):
+class FeedParser(object):
     def __init__(self, target):
         self.target = target
 
@@ -22,7 +22,7 @@ class RossoParser(object):
         return result
 
 
-class FileParser(RossoParser):
+class FileParser(FeedParser):
     def __init__(self, filepath):
         super(FileParser, self).__init__(filepath)
 
@@ -30,11 +30,14 @@ class FileParser(RossoParser):
         filepath = self.target
         if not os.path.exists(filepath):
             return None
+        # Buffer file contents once to work-around for encoding error
+        buffer = ""
         with open(filepath) as fp:
-            return self.parse_feed(fp)
+            buffer = fp.read()
+        return self.parse_feed(buffer)
 
 
-class HTTPParser(RossoParser):
+class HTTPParser(FeedParser):
     def __init__(self, url):
         super(HTTPParser, self).__init__(url)
 

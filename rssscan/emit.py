@@ -1,7 +1,7 @@
 import click
 
 
-class RossoEmitter(object):
+class FeedEmitter(object):
     def __init__(self):
         pass
 
@@ -10,7 +10,7 @@ class RossoEmitter(object):
         pass
 
 
-class StdoutEmitter(RossoEmitter):
+class StdoutEmitter(FeedEmitter):
     def __init__(self):
         super(StdoutEmitter, self).__init__()
 

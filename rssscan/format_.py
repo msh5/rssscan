@@ -1,4 +1,4 @@
-class RossoFormatter(object):
+class FeedFormatter(object):
     def __init__(self):
         pass
 
@@ -7,7 +7,7 @@ class RossoFormatter(object):
         pass
 
 
-class PPrintFormatter(RossoFormatter):
+class PPrintFormatter(FeedFormatter):
     def __init__(self):
         super(PPrintFormatter, self).__init__()
 
@@ -20,7 +20,7 @@ class PPrintFormatter(RossoFormatter):
         return result
 
 
-class ListFormatter(RossoFormatter):
+class ListFormatter(FeedFormatter):
     def __init__(self):
         super(ListFormatter, self).__init__()
 
