@@ -1,7 +1,7 @@
 import os
 import sys
 
-from rosso.__about__ import __version__
+from rssscan.__about__ import __version__
 
 LIB_ROOT = os.path.dirname(os.path.realpath(__file__))
 LIB_VENDOR = os.sep.join([LIB_ROOT, 'vendor'])

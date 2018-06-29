@@ -1,7 +1,7 @@
-.PHONY: graph vendoring
+.PHONY: diagram vendoring
 
-graph:
-	tools/update_graph.sh
+diagram:
+	tools/update_diagram.sh
 
 vendoring:
 	tools/update_vendor.sh

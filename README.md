@@ -5,7 +5,7 @@ Everything goes well with RSS feeds.
 ## Install
 
 ```console
-$ pip install rosso
+$ pip install rssscan
 // Install only Rosso package because it requires no dependency packages
 ```
 
@@ -14,7 +14,7 @@ $ pip install rosso
 ### Basic
 
 ```console
-$ pipenv run bin/rosso pprint http://tech.uzabase.com/rss
+$ rssscan http://tech.uzabase.com/rss
 title: GaugeのConc...
 description: <p>こんにちは！SPEEDA日本事業部でテストエンジニアを...
 pubDate: Thu, 07 Jun 2018 12:04:32 +0900
@@ -28,7 +28,7 @@ pubDate: Wed, 23 May 2018 17:31:05 +0900
 ### Multiple RSS
 
 ```console
-$ pipenv run bin/rosso pprint http://tech.uzabase.com/rss https://qiita.com/msh5/feed.atom
+$ rssscan http://tech.uzabase.com/rss https://qiita.com/msh5/feed.atom
 title: GaugeのConc...
 description: <p>こんにちは！SPEEDA日本事業部でテストエンジニアを...
 pubDate: Thu, 07 Jun 2018 12:04:32 +0900
@@ -52,7 +52,7 @@ pubDate: 2018-06-07T18:17:39Z
 ### Japanese Style "pubDate"
 
 ```console
-$ pipenv run bin/rosso pprint --pubdate=jp http://tech.uzabase.com/rss
+$ rssscan --pubdate=jp http://tech.uzabase.com/rss
 title: GaugeのConc...
 description: <p>こんにちは！SPEEDA日本事業部でテストエンジニアを...
 pubDate: 2018-06-07(Thu) 12:04:32
@@ -66,7 +66,7 @@ pubDate: 2018-05-23(Wed) 17:31:05
 ### List Up with Title Only
 
 ```console  
-$ pipenv run bin/rosso titles share/sample.rss
+$ rssscan --title-only share/sample.rss
 GaugeのConc...
 モンスト、スマニュー...
 JaSST'18 T...
@@ -77,4 +77,4 @@ JaSST'18 T...
 
 ## Class Diagram
 
-![rosso class diagram](docs/classes_rosso.png)
+![rssscan class diagram](docs/classes_rssscan.png)

@@ -5,8 +5,8 @@ import sys
 
 if __name__ == '__main__':
     LIBDIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-    if os.path.exists(os.path.join(LIBDIR, 'rosso')):
+    if os.path.exists(os.path.join(LIBDIR, 'rssscan')):
         sys.path.insert(0, LIBDIR)
 
-    from rosso.cmd import main
+    from rssscan.cmd import main
     main()

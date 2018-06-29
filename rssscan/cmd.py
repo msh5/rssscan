@@ -4,14 +4,14 @@ import traceback
 
 import click
 
-from rosso import __version__
-from rosso import emit
-from rosso import filter_
-from rosso import format_
-from rosso import parse
-from rosso import pipeline
+from rssscan import __version__
+from rssscan import emit
+from rssscan import filter_
+from rssscan import format_
+from rssscan import parse
+from rssscan import pipeline
 
-APP_NAME = 'rosso'
+APP_NAME = 'rssscan'
 VERSION_OPT_MSG = APP_NAME + ' %(version)s'
 TITLE_SHORTEN_LENGTH = 10
 DESC_SHORTEN_LENGTH = 30
