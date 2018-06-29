@@ -14,4 +14,5 @@ yapf = "*"
 python_version = "3.6"
 
 [scripts]
-graph = "pyreverse -o png -p rosso --ignore=vendor/ ../rosso/"
+diagram = "tools/update_diagram.sh"
+vendor = "tools/update_vendor.sh"
