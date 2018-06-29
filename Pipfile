@@ -11,7 +11,7 @@ rope = "*"
 yapf = "*"
 
 [requires]
-python_version = "2.7"
+python_version = "3.6"
 
 [scripts]
 graph = "pyreverse -o png -p rosso --ignore=vendor/ ../rosso/"
