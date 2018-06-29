@@ -21,7 +21,7 @@ DESC_SHORTEN_LENGTH = 30
 @click.version_option(version=__version__, message=VERSION_OPT_MSG)
 @click.option('--title', default='short', type=click.Choice(['full', 'short']))
 @click.option('--desc', default='short', type=click.Choice(['full', 'short']))
-@click.option('--pubdate', default='jp', type=click.Choice(['raw', 'jp']))
+@click.option('--pubdate', default='raw', type=click.Choice(['raw', 'jp']))
 @click.option('--field', type=click.Choice(['title', 'desc', 'pubdate']))
 @click.argument('url_or_filepaths', nargs=-1, required=True)
 def scan(title, desc, pubdate, field, url_or_filepaths):
